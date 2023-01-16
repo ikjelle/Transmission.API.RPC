@@ -136,9 +136,9 @@ namespace Transmission.API.RPC
         /// Get fields of torrents from ids (API: torrent-get)
         /// </summary>
         /// <param name="fields">Fields of torrents</param>
-        /// <param name="ids">IDs of torrents (null or empty for get all torrents)</param>
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both (null or empty for get all torrents)</param>
         /// <returns>Torrents info</returns>
-        public TransmissionTorrents TorrentGet(string[] fields, params int[] ids)
+        public TransmissionTorrents TorrentGet(string[] fields, params object[] ids)
         {
             var task = TorrentGetAsync(fields, ids);
             task.WaitAndUnwrapException();
@@ -148,9 +148,9 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Remove torrents (API: torrent-remove)
         /// </summary>
-        /// <param name="ids">Torrents id</param>
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
         /// <param name="deleteData">Remove data</param>
-        public void TorrentRemove(int[] ids, bool deleteData = false)
+        public void TorrentRemove(object[] ids, bool deleteData = false)
         {
             TorrentRemoveAsync(ids, deleteData).WaitAndUnwrapException();
         }
@@ -235,8 +235,8 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Move torrents in queue on top (API: queue-move-top)
         /// </summary>
-        /// <param name="ids">Torrents id</param>
-        public void TorrentQueueMoveTop(int[] ids)
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+        public void TorrentQueueMoveTop(object[] ids)
         {
             TorrentQueueMoveTopAsync(ids).WaitAndUnwrapException();
         }
@@ -244,8 +244,8 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Move up torrents in queue (API: queue-move-up)
         /// </summary>
-        /// <param name="ids"></param>
-        public void TorrentQueueMoveUp(int[] ids)
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+        public void TorrentQueueMoveUp(object[] ids)
         {
             TorrentQueueMoveUpAsync(ids).WaitAndUnwrapException();
         }
@@ -253,8 +253,8 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Move down torrents in queue (API: queue-move-down)
         /// </summary>
-        /// <param name="ids"></param>
-        public void TorrentQueueMoveDown(int[] ids)
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+        public void TorrentQueueMoveDown(object[] ids)
         {
             TorrentQueueMoveDownAsync(ids).WaitAndUnwrapException();
         }
@@ -262,8 +262,8 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Move torrents to bottom in queue  (API: queue-move-bottom)
         /// </summary>
-        /// <param name="ids"></param>
-        public void TorrentQueueMoveBottom(int[] ids)
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+        public void TorrentQueueMoveBottom(object[] ids)
         {
             TorrentQueueMoveBottomAsync(ids).WaitAndUnwrapException();
         }
@@ -271,10 +271,10 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Set new location for torrents files (API: torrent-set-location)
         /// </summary>
-        /// <param name="ids">Torrent ids</param>
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
         /// <param name="location">The new torrent location</param>
         /// <param name="move">Move from previous location</param>
-        public void TorrentSetLocation(int[] ids, string location, bool move)
+        public void TorrentSetLocation(object[] ids, string location, bool move)
         {
             TorrentSetLocationAsync(ids, location, move).WaitAndUnwrapException();
         }
@@ -282,10 +282,10 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Rename a file or directory in a torrent (API: torrent-rename-path)
         /// </summary>
-        /// <param name="id">The torrent whose path will be renamed</param>
+        /// <param name="id">The torrent's id number or sha1 hash whose path will be renamed</param>
         /// <param name="path">The path to the file or folder that will be renamed</param>
         /// <param name="name">The file or folder's new name</param>
-		public RenameTorrentInfo TorrentRenamePath(int id, string path, string name)
+		public RenameTorrentInfo TorrentRenamePath(object id, string path, string name)
         {
             var task = TorrentRenamePathAsync(id, path, name);
             task.WaitAndUnwrapException();
@@ -296,7 +296,7 @@ namespace Transmission.API.RPC
         ///// <summary>
         ///// Reannounce torrent (API: torrent-reannounce)
         ///// </summary>
-        ///// <param name="ids"></param>
+        /// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
         //public void ReannounceTorrents(object[] ids)
         //{
         //    ReannounceTorrentsAsync(ids).WaitAndUnwrapException();

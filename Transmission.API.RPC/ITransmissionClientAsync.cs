@@ -63,38 +63,38 @@ namespace Transmission.API.RPC
         /// <param name="fields">Fields of torrents</param>
         /// <param name="ids">IDs of torrents (null or empty for get all torrents)</param>
         /// <returns>Torrents info</returns>
-        Task<TransmissionTorrents> TorrentGetAsync(string[] fields, params int[] ids);
+        Task<TransmissionTorrents> TorrentGetAsync(string[] fields, params object[] ids);
 
         /// <summary>
         /// Move torrents to bottom in queue  (API: queue-move-bottom)
         /// </summary>
         /// <param name="ids"></param>
-        Task TorrentQueueMoveBottomAsync(int[] ids);
+        Task TorrentQueueMoveBottomAsync(object[] ids);
 
         /// <summary>
         /// Move down torrents in queue (API: queue-move-down)
         /// </summary>
         /// <param name="ids"></param>
-        Task TorrentQueueMoveDownAsync(int[] ids);
+        Task TorrentQueueMoveDownAsync(object[] ids);
 
         /// <summary>
         /// Move torrents in queue on top (API: queue-move-top)
         /// </summary>
         /// <param name="ids">Torrents id</param>
-        Task TorrentQueueMoveTopAsync(int[] ids);
+        Task TorrentQueueMoveTopAsync(object[] ids);
 
         /// <summary>
         /// Move up torrents in queue (API: queue-move-up)
         /// </summary>
         /// <param name="ids"></param>
-        Task TorrentQueueMoveUpAsync(int[] ids);
+        Task TorrentQueueMoveUpAsync(object[] ids);
 
         /// <summary>
         /// Remove torrents
         /// </summary>
         /// <param name="ids">Torrents id</param>
         /// <param name="deleteData">Remove local data</param>
-        Task TorrentRemoveAsync(int[] ids, bool deleteData = false);
+        Task TorrentRemoveAsync(object[] ids, bool deleteData = false);
 
         /// <summary>
         /// Rename a file or directory in a torrent (API: torrent-rename-path)
@@ -102,7 +102,7 @@ namespace Transmission.API.RPC
         /// <param name="id">The torrent whose path will be renamed</param>
         /// <param name="path">The path to the file or folder that will be renamed</param>
         /// <param name="name">The file or folder's new name</param>
-        Task<RenameTorrentInfo> TorrentRenamePathAsync(int id, string path, string name);
+        Task<RenameTorrentInfo> TorrentRenamePathAsync(object id, string path, string name);
 
         /// <summary>
         /// Set torrent params (API: torrent-set)
@@ -116,7 +116,7 @@ namespace Transmission.API.RPC
         /// <param name="ids">Torrent ids</param>
         /// <param name="location">The new torrent location</param>
         /// <param name="move">Move from previous location</param>
-        Task TorrentSetLocationAsync(int[] ids, string location, bool move);
+        Task TorrentSetLocationAsync(object[] ids, string location, bool move);
 
         /// <summary>
         /// Start recently active torrents (API: torrent-start)

@@ -107,9 +107,9 @@ namespace Transmission.API.RPC
 		/// Get fields of torrents from ids (API: torrent-get)
 		/// </summary>
 		/// <param name="fields">Fields of torrents</param>
-		/// <param name="ids">IDs of torrents (null or empty for get all torrents)</param>
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both (null or empty for get all torrents)</param>
 		/// <returns>Torrents info</returns>
-		public async Task<TransmissionTorrents> TorrentGetAsync(string[] fields, params int[] ids)
+		public async Task<TransmissionTorrents> TorrentGetAsync(string[] fields, params object[] ids)
 		{
 			var arguments = new Dictionary<string, object>();
 			arguments.Add("fields", fields);
@@ -128,9 +128,9 @@ namespace Transmission.API.RPC
         /// <summary>
         /// Remove torrents
         /// </summary>
-        /// <param name="ids">Torrents id</param>
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
         /// <param name="deleteData">Remove data</param>
-        public async Task TorrentRemoveAsync(int[] ids, bool deleteData = false)
+        public async Task TorrentRemoveAsync(object[] ids, bool deleteData = false)
 		{
 			var arguments = new Dictionary<string, object>();
 
@@ -235,8 +235,8 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Move torrents in queue on top (API: queue-move-top)
 		/// </summary>
-		/// <param name="ids">Torrents id</param>
-		public async Task TorrentQueueMoveTopAsync(int[] ids)
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+		public async Task TorrentQueueMoveTopAsync(object[] ids)
 		{
 			var request = new TransmissionRequest("queue-move-top", new Dictionary<string, object> { { "ids", ids } });
 			var response = await SendRequestAsync(request);
@@ -245,8 +245,8 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Move up torrents in queue (API: queue-move-up)
 		/// </summary>
-		/// <param name="ids"></param>
-		public async Task TorrentQueueMoveUpAsync(int[] ids)
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+		public async Task TorrentQueueMoveUpAsync(object[] ids)
 		{
 			var request = new TransmissionRequest("queue-move-up", new Dictionary<string, object> { { "ids", ids } });
 			var response = await SendRequestAsync(request);
@@ -255,8 +255,8 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Move down torrents in queue (API: queue-move-down)
 		/// </summary>
-		/// <param name="ids"></param>
-		public async Task TorrentQueueMoveDownAsync(int[] ids)
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+		public async Task TorrentQueueMoveDownAsync(object[] ids)
 		{
 			var request = new TransmissionRequest("queue-move-down", new Dictionary<string, object> { { "ids", ids } });
 			var response = await SendRequestAsync(request);
@@ -265,8 +265,8 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Move torrents to bottom in queue  (API: queue-move-bottom)
 		/// </summary>
-		/// <param name="ids"></param>
-		public async Task TorrentQueueMoveBottomAsync(int[] ids)
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
+		public async Task TorrentQueueMoveBottomAsync(object[] ids)
 		{
 			var request = new TransmissionRequest("queue-move-bottom", new Dictionary<string, object> { { "ids", ids } });
 			var response = await SendRequestAsync(request);
@@ -275,10 +275,10 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Set new location for torrents files (API: torrent-set-location)
 		/// </summary>
-		/// <param name="ids">Torrent ids</param>
+		/// <param name="ids">A list of torrent id numbers, sha1 hash strings, or both</param>
 		/// <param name="location">The new torrent location</param>
 		/// <param name="move">Move from previous location</param>
-		public async Task TorrentSetLocationAsync(int[] ids, string location, bool move)
+		public async Task TorrentSetLocationAsync(object[] ids, string location, bool move)
 		{
 			var arguments = new Dictionary<string, object>();
 			arguments.Add("ids", ids);
@@ -292,13 +292,13 @@ namespace Transmission.API.RPC
 		/// <summary>
 		/// Rename a file or directory in a torrent (API: torrent-rename-path)
 		/// </summary>
-		/// <param name="id">The torrent whose path will be renamed</param>
+        /// <param name="id">The torrent's id number or sha1 hash whose path will be renamed</param>
 		/// <param name="path">The path to the file or folder that will be renamed</param>
 		/// <param name="name">The file or folder's new name</param>
-		public async Task<RenameTorrentInfo> TorrentRenamePathAsync(int id, string path, string name)
+		public async Task<RenameTorrentInfo> TorrentRenamePathAsync(object id, string path, string name)
 		{
 			var arguments = new Dictionary<string, object>();
-			arguments.Add("ids", new int[] { id });
+			arguments.Add("ids", new object[] { id });
 			arguments.Add("path", path);
 			arguments.Add("name", name);
 

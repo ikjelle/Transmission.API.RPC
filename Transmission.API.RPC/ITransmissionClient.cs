@@ -76,38 +76,38 @@ namespace Transmission.API.RPC
         /// <param name="fields">Fields of torrents</param>
         /// <param name="ids">IDs of torrents (null or empty for get all torrents)</param>
         /// <returns>Torrents info</returns>
-        TransmissionTorrents TorrentGet(string[] fields, params int[] ids);
+        TransmissionTorrents TorrentGet(string[] fields, params object[] ids);
 
         /// <summary>
         /// Move torrents to bottom in queue  (API: queue-move-bottom)
         /// </summary>
         /// <param name="ids"></param>
-        void TorrentQueueMoveBottom(int[] ids);
+        void TorrentQueueMoveBottom(object[] ids);
 
         /// <summary>
         /// Move down torrents in queue (API: queue-move-down)
         /// </summary>
         /// <param name="ids"></param>
-        void TorrentQueueMoveDown(int[] ids);
+        void TorrentQueueMoveDown(object[] ids);
 
         /// <summary>
         /// Move torrents in queue on top (API: queue-move-top)
         /// </summary>
         /// <param name="ids">Torrents id</param>
-        void TorrentQueueMoveTop(int[] ids);
+        void TorrentQueueMoveTop(object[] ids);
 
         /// <summary>
         /// Move up torrents in queue (API: queue-move-up)
         /// </summary>
         /// <param name="ids"></param>
-        void TorrentQueueMoveUp(int[] ids);
+        void TorrentQueueMoveUp(object[] ids);
 
         /// <summary>
         /// Remove torrents (API: torrent-remove)
         /// </summary>
         /// <param name="ids">Torrents id</param>
         /// <param name="deleteData">Remove local data</param>
-        void TorrentRemove(int[] ids, bool deleteData = false);
+        void TorrentRemove(object[] ids, bool deleteData = false);
 
         /// <summary>
         /// Rename a file or directory in a torrent (API: torrent-rename-path)
@@ -115,7 +115,7 @@ namespace Transmission.API.RPC
         /// <param name="id">The torrent whose path will be renamed</param>
         /// <param name="path">The path to the file or folder that will be renamed</param>
         /// <param name="name">The file or folder's new name</param>
-        RenameTorrentInfo TorrentRenamePath(int id, string path, string name);
+        RenameTorrentInfo TorrentRenamePath(object id, string path, string name);
 
         /// <summary>
         /// Set torrent params (API: torrent-set)
@@ -129,7 +129,7 @@ namespace Transmission.API.RPC
         /// <param name="ids">Torrent ids</param>
         /// <param name="location">The new torrent location</param>
         /// <param name="move">Move from previous location</param>
-        void TorrentSetLocation(int[] ids, string location, bool move);
+        void TorrentSetLocation(object[] ids, string location, bool move);
 
         /// <summary>
         /// Start recently active torrents (API: torrent-start)

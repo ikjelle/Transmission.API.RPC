@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Collections;
@@ -116,7 +116,7 @@ namespace Transmission.API.RPC.Test
 			var torrentInfo = torrentsInfo.Torrents.FirstOrDefault();
 			Assert.IsNotNull(torrentInfo, "Torrent not found");
 
-			client.TorrentRemove(new int[] { torrentInfo.ID });
+            client.TorrentRemove(new object[] { torrentInfo.ID });
 
 			torrentsInfo = client.TorrentGet(TorrentFields.ALL_FIELDS);
 
